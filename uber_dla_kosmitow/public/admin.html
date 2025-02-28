@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona dla przewoźników</title>
+</head>
+<body>
+    <h1>Przewoźnik</h1>
+    <div id="filter_con">
+        <input type="text" id="filter" placeholder="Wyszukaj" oninput="filterOrders()">
+    </div>
+
+    <div id="list"></div>
+
+    <script src="script.js" defer></script>
+    <script> 
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('/offers')
+        .then(response => response.json())
+        .then(objOfert => {
+            const dataContainer = document.getElementById("list");
+            
+            objOfert.forEach(offer => {
+                const div = document.createElement("div");
+                div.classList.add("item");
+                const inputField = document.createElement("input");
+                inputField.type = "number";
+                inputField.placeholder = "koszt";
+
+                const toggleButton = document.createElement("button");
+                toggleButton.textContent = "Zaakceptuj";
+
+                const deleteYourOffer = document.createElement("button");
+                deleteYourOffer.textContent = "Wycofaj ofertę";
+
+                toggleButton.addEventListener("click", () => {
+                    updateOffer(inputField.value,getCookie('username'),1,offer.id)
+                });
+
+                deleteYourOffer.addEventListener("click", () => {
+                  updateOffer(null, null, 1, offer.id);
+                });
+                const endTransportation = document.createElement("button");
+                endTransportation.textContent = "Zakończ przejazd";
+                endTransportation.addEventListener("click", () => {
+                  deleteOrder(offer.id);
+              });
+                
+                if (offer.ifAccepted === 0 && getCookie('environment')=== offer.environment) {
+                    div.innerHTML = `
+                        <p>---------------------</p>
+                        <p>nazwa użytkownika: ${offer.passenger_username}</p>
+                        <p>adres pasażera: ${offer.passenger_loc}</p>
+                        <p>do: ${offer.target_loc}</p>
+                        <p>liczba pasażerów: ${offer.number_of_passengers}</p>
+                    `;
+                    div.appendChild(inputField);
+                    div.appendChild(toggleButton);
+                }
+                else if(offer.ifAccepted === 1 && getCookie('username') === offer.driver_username){
+                    div.innerHTML = `
+                        <p>---------------------</p>
+                        <p>nazwa użytkownika: ${offer.passenger_username}</p>
+                        <p>adres pasażera: ${offer.passenger_loc}</p>
+                        <p>do: ${offer.target_loc}</p>
+                        <p>liczba pasażerów: ${offer.number_of_passengers}</p>
+                    `;
+                    div.appendChild(deleteYourOffer); 
+                }
+                else if(offer.ifAccepted === 2 && getCookie('username') === offer.driver_username){
+                    div.innerHTML = `
+                        <p>---------------------</p>
+                        <p>Masz aktywny przejazd:</p>
+                        <p>nazwa użytkownika: ${offer.passenger_username}</p>
+                        <p>adres pasażera: ${offer.passenger_loc}</p>
+                        <p>do: ${offer.target_loc}</p>
+                        <p>liczba pasażerów: ${offer.number_of_passengers}</p>
+                    `;
+                    div.appendChild(endTransportation);
+                }
+                dataContainer.appendChild(div)
+                
+            });
+            
+        })
+        .catch(error => console.error('Błąd podczas pobierania ofert:', error));
+        
+    });
+    </script>
+</body>
+</html>

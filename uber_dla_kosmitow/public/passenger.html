@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>użytkownicy</title>
+</head>
+    <body>
+      <label for="passenger_loc">Twoja lokalizacja:</label>
+      <select id="passenger_loc" name="passenger_loc"></select><br><br>
+      <label for="target_loc">Cel podróży:</label>
+      <select id="target_loc" name="target_loc"></select><br><br>
+      
+
+    <label for="environment">Środowisko:</label>
+      <select id="environment" name="environment">
+    </select>
+    <br>    
+    <label for="vehicle_model">Pojazd:</label>
+    <select id="vehicle_model" name="vehicle_model">
+    </select>    
+    <br>
+    <label for="number_of_passenger">Ilość osób:</label>
+    <input class = "input" type = "text" id="number_of_passenger" placeholder="Ilość osób"><br>
+    <label for="addtional_boost"> Napęd świetlny?</label>
+    <input type="checkbox" id="addtional_boost" name="addtional_boost"><br>
+    
+    <button class ="btn" type="button" onclick="getOrder()">Wezwij</button><br>
+
+
+
+        
+    
+    <div id="list"></div>
+    
+    <script src = "script.js" charset="utf-8"></script>
+    <script src = "passenger.js" charset="utf-8"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+      const objOfert = [];
+      try {
+          const response = await fetch('http://localhost:4000/offers');
+          const data = await response.json();
+          objOfert.push(...data);
+          console.log('Oferty:', objOfert);
+      } catch (error) {
+          console.error('Błąd podczas pobierania ofert:', error);
+      }
+      
+      const dataContainer = document.getElementById("list");
+
+      objOfert.forEach(offer => {
+          if (offer.passenger_username == getCookie('username')) {
+              const div = document.createElement("div");
+              div.classList.add("item");
+
+              const toggleButton = document.createElement("button");
+              const accept = document.createElement("button");
+              const deletePrice = document.createElement("button");
+
+              toggleButton.textContent = "USUŃ";
+              accept.textContent = "ZAAKCEPYUJ";
+              deletePrice.textContent = "ODRZUĆ CENE";
+
+              toggleButton.addEventListener("click", () => {
+                  deleteOrder(offer.id);
+              });
+
+              accept.addEventListener("click", () => {
+                  updateOffer(null, null, 2, offer.id);
+              });
+
+              deletePrice.addEventListener("click", () => {
+                  updateOffer(null, null, 0, offer.id);
+              });
+                let statusText = '';
+                if (offer.ifAccepted === 0) {
+                    statusText = 'oczekuje na przewoźnika';
+                } else if (offer.ifAccepted === 1) {
+                    statusText = 'potwierdź cenę';
+                } else if (offer.ifAccepted === 2) {
+                    statusText = 'przewoźnik w drodze';
+                } else if (offer.ifAccepted === 3) {
+                    statusText = 'zlecenie zakończone';
+                }
+              
+
+              // Dodanie treści do div
+              div.innerHTML = `
+                  <p>---------------------</p>
+                  <p>Nazwa kierowcy: ${offer.driver_username === null ? "brak" : offer.driver_username}</p>
+                  <p>Adres pasażera: ${offer.passenger_loc}</p>
+                  <p>Do: ${offer.target_loc}</p>
+                  <p>Środowisko: ${offer.environment}</p>
+                  <p>Hipernapęd: ${offer.additional_boost}</p>
+                  <p>Liczba pasażerów: ${offer.number_of_passengers}</p>
+                  <p>Cena: ${offer.price === null ? "brak" : offer.price+"$"}</p>
+                  <p>status: ${statusText}</p>
+              `;
+              
+              // Dodaj przyciski do div
+              div.appendChild(toggleButton);
+              if (offer.ifAccepted === 1){
+              div.appendChild(accept);
+              div.appendChild(deletePrice);          
+              }
+
+
+              // Dodaj div do kontenera
+              dataContainer.appendChild(div);
+          }
+      });
+  });
+
+       
+      </script>
+
+    
+    </body>
+</html>
+
+

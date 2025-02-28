@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFO Uber</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>  
+    <h1>ZALOGUJ SIĘ</h1>
+    <form>
+      <input class="input" type="text" id="username" placeholder="Login">
+      <input class="input" type="password" id="password" placeholder="Hasło">
+      <button class="btn" type="button" onclick="checkLogin()">Zaloguj</button>
+    </form>
+
+    <h1>ZAREJESTRUJ SIĘ</h1>
+    <form>
+      <input class="input" type="text" id="potencial_username" placeholder="Login">
+      <input class="input" type="password" id="potencial_password" placeholder="Hasło">
+      <form>
+        <label>
+            <input type="checkbox" id="if_driver" onclick="Show()"> Czy chcesz być przewoźnikiem?
+        </label>
+
+        <div id="Exstra"><br>
+            <label for="field1">Wiek:</label>
+            <input type="text" id="age" name="age"><br><br>
+            <form id="vehicle_model_form">
+              <label for="vehicle_model">Pojazd:</label>
+              <select id="vehicle_model" name="vehicle_model"></select><br><br>
+            </form>
+            
+            <form id="species_form">
+              <label for="species">Rodzaj:</label>
+              <select id="species" name="species"></select><br><br>
+            </form>
+            
+
+
+
+                </select><br><br>
+        </div>
+    </form>
+
+
+
+
+    <button class="btn" type="button" onclick="registration()">Zarejestruj</button>
+</form>
+
+<script src="script.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
