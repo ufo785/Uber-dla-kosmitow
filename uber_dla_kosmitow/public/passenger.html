@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>użytkownicy</title>
+    <title>Zlecienie przewozu</title>
+    <link rel="stylesheet" href="style.css">
 </head>
     <body>
-      <label for="passenger_loc">Twoja lokalizacja:</label>
-      <select id="passenger_loc" name="passenger_loc"></select><br><br>
-      <label for="target_loc">Cel podróży:</label>
-      <select id="target_loc" name="target_loc"></select><br><br>
-      
+        <div id="stars-container"></div>
 
-    <label for="environment">Środowisko:</label>
-      <select id="environment" name="environment">
-    </select>
-    <br>    
-    <label for="vehicle_model">Pojazd:</label>
-    <select id="vehicle_model" name="vehicle_model">
-    </select>    
-    <br>
-    <label for="number_of_passenger">Ilość osób:</label>
-    <input class = "input" type = "text" id="number_of_passenger" placeholder="Ilość osób"><br>
-    <label for="addtional_boost"> Napęd świetlny?</label>
-    <input type="checkbox" id="addtional_boost" name="addtional_boost"><br>
-    
-    <button class ="btn" type="button" onclick="getOrder()">Wezwij</button><br>
+        <div class="passenger-form">
+            <label for="passenger_loc">Twoja lokalizacja:</label>
+            <select id="passenger_loc" name="passenger_loc"></select><br><br>
+            <label for="target_loc">Cel podróży:</label>
+            <select id="target_loc" name="target_loc"></select><br><br>
+            <label for="environment">Środowisko:</label>
+            <select id="environment" name="environment"></select><br>
+            <label for="vehicle_model">Pojazd:</label>
+            <select id="vehicle_model" name="vehicle_model"></select><br>
+            <label for="number_of_passenger">Ilość osób:</label>
+            <input class="input" type="text" id="number_of_passenger" placeholder="Ilość osób"><br>
+            <label for="addtional_boost"> Napęd świetlny?</label>
+            <input type="checkbox" id="addtional_boost" name="addtional_boost"><br>
+            
+            <button class="btn" type="button" onclick="getOrder()">Wezwij</button><br>
+        </div>
 
 
 
@@ -86,7 +85,7 @@
                 }
               
 
-              // Dodanie treści do div
+              
               div.innerHTML = `
                   <p>---------------------</p>
                   <p>Nazwa kierowcy: ${offer.driver_username === null ? "brak" : offer.driver_username}</p>
@@ -99,7 +98,7 @@
                   <p>status: ${statusText}</p>
               `;
               
-              // Dodaj przyciski do div
+              
               div.appendChild(toggleButton);
               if (offer.ifAccepted === 1){
               div.appendChild(accept);
@@ -107,7 +106,6 @@
               }
 
 
-              // Dodaj div do kontenera
               dataContainer.appendChild(div);
           }
       });
@@ -116,6 +114,7 @@
        
       </script>
 
+<script src="star.js"></script>
     
     </body>
 </html>

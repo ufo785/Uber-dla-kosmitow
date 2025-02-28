@@ -1,0 +1,243 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0a0a23; 
+    color: #ffffff; 
+    line-height: 1.6;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #ffffff; 
+    margin-bottom: 20px;
+    text-align: center; 
+}
+
+
+
+#stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+
+.form-container {
+    max-width: 400px; 
+    margin: 0 auto; 
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px); 
+}
+
+
+form {
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#Exstra {
+    margin-top: 20px;
+}
+
+#Exstra label {
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+#Exstra input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+#Exstra select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+#list {
+    margin-top: 20px;
+}
+
+.item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.item p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+.item button {
+    padding: 8px 12px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.item button:hover {
+    background-color: #0056b3;
+}
+
+
+#filter_con {
+    margin-bottom: 20px;
+}
+
+#filter {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+.passenger-form {
+    max-width: 400px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.passenger-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+.passenger-form select, .passenger-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.passenger-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.passenger-form button:hover {
+    background-color: #0056b3;
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .form-container, .passenger-form {
+        padding: 15px;
+    }
+
+    .input, .btn, #Exstra input[type="text"], #Exstra select, #filter, .passenger-form select, .passenger-form input[type="text"] {
+        font-size: 0.9rem;
+    }
+}
